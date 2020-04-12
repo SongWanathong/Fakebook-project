@@ -1,13 +1,13 @@
 import React from 'react';
 import { Layout } from 'antd';
 import { Route } from 'react-router-dom';
-import Login from './pages/Login';
 import Changepassword from './pages/Changepassword';
-import Signup from './pages/Signup';
+import Signup from './pages/authentication/Signup';
 import Profile from './pages/Profile';
 import Navbar from './component/navbar';
 import { Redirect,Switch } from 'react-router';
 import Home from './pages/Home';
+import Login from './pages/authentication/Login';
 
 
 

@@ -12,7 +12,7 @@ class PostList extends Component {
            post={post}
         //  arhor={post.arhor} message={post.message} imgSrc={post.imgSrc}
         // date={post.date} owner={post.owner} comment={post.commentList}
-        // 
+        
         />
         })
     }

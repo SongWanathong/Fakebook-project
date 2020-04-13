@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { Layout } from 'antd';
 import { Route } from 'react-router-dom';
 import Changepassword from './pages/Changepassword';
@@ -18,11 +18,17 @@ function App() {
       <Header style={{height:'100%'}} ><Navbar/></Header>
       <Content style={{height:'100%'}}>
         <Switch>
-      <Route exact path='/' component={Login} />
+          
+      
       <Route exact path='/changepassword' component={Changepassword} />
       <Route exact path='/signup' component={Signup} />
       <Route exact path='/profile' component={Profile} />
-      <Route exact path='/home' component={Home} />
+     {localStorage.getItem('ACCESS_TOKEN')? 
+     <Route exact path='/home' component={Home} />
+     :null}
+     {!localStorage.getItem('ACCESS_TOKEN')? 
+     <Route exact path='/' component={Login} />
+          :null}
       <Redirect to='/'/>
       </Switch>
       </Content>

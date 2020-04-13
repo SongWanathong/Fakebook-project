@@ -12,14 +12,14 @@ class CreatePost extends Component {
         return (
 
 
-            <Card title="Create"   >
+            <Card title="Create" style={{width:'650px'}}  >
                 <Row  >
-                    <Col xs={4} lg={2}  >
+                    <Col   >
                         <Avatar icon="user" src={avatarsrc} size='large' />
 
                     </Col>
-                    <Col xs={20} lg={20} >
-                        <TextArea placeholder="เขียนอะไรบางอย่างสิ" allowClear
+                    <Col  >
+                        <TextArea style={{width:'500px'}} placeholder="เขียนอะไรบางอย่างสิ" allowClear
                             autoSize={{ minRows: 2, maxRows: 6 }}
                         />
                     </Col>

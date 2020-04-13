@@ -3,6 +3,22 @@ import { notification } from 'antd';
 import { CheckCircleFilled,CloseCircleFilled} from '@ant-design/icons';
 
 
+const successSingupNotification = ()=>{
+    notification.open({
+        message: 'Singup sucsec',
+        description: 'enjoy with fakebook',
+        icon: <CheckCircleFilled style={{ color: '#54b600' }} />
+    })
+}
+
+
+const failSingupNotification = (message)=>{
+    notification.open({
+        message: 'fail Singup ',
+        description: message,
+        icon: <CheckCircleFilled style={{ color: '#f10' }} />
+    })
+}
 
  const successLoginNotification = ()=>{
     notification.open({
@@ -19,7 +35,7 @@ import { CheckCircleFilled,CloseCircleFilled} from '@ant-design/icons';
     })
 }
 
-export {successLoginNotification,failLoginNotification}
+export {successLoginNotification,failLoginNotification,successSingupNotification,failSingupNotification}
 
 
   

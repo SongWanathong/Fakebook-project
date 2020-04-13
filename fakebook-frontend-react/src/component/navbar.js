@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Menu } from 'antd';
 
 class Navbar extends Component {
+
+    handlelogout=()=>{
+    localStorage.removeItem("ACCESS_TOKEN")
+    }
     render() {
         return (
             <Menu 
@@ -14,6 +18,7 @@ class Navbar extends Component {
                     <Menu.Item><a href='/changepassword'> Change Password</a></Menu.Item>
                     <Menu.Item><a href='/profile'> Profile</a></Menu.Item>
                     <Menu.Item><a href='/home'> Home</a></Menu.Item>
+                    <Menu.Item><a onClick={()=>this.handlelogout()}> ออกจากระบบ</a></Menu.Item>
 
 
             </Menu>

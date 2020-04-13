@@ -46,7 +46,7 @@ module.exports = (app,db)=>{
                 }
             }
             else{
-                const token = jwt.sign({id:user.id,role:user.roel,name:user.name},
+                const token = jwt.sign({id:user.id,role:user.role,name:user.name},
                     jwtOptins.secretOrkey,{
                    expiresIn:3600
                 })

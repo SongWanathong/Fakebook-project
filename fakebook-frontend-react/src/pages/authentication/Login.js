@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Input, Button,Form } from 'antd';
 import Axios from '../../config/axios.setup';
 import { failLoginNotification,successLoginNotification } from '../../component/notification';
+import jwtDecode from 'jwt-decode';
 class Login extends Component {
 
     state = {
@@ -20,7 +21,10 @@ class Login extends Component {
         }).then((result) => {
             
             successLoginNotification()
-            localStorage.setItem("ACCESS_TOKEN", result.data.token)
+           const token = localStorage.setItem("ACCESS_TOKEN", result.data.token)
+            const user =jwtDecode(token)
+            // localStorage.setItem('User',user)
+
            
             
             this.props.history.push('/home')

@@ -16,7 +16,6 @@ class CreatePost extends Component {
 
     handlePost = () => {
         let payload = new FormData()
-
         payload.append('photoPost', this.state.fileList[0])
         payload.append('message', this.state.TextArea)
 

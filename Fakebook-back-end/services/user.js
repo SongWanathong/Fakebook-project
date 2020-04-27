@@ -143,6 +143,38 @@ app.put('/change-password', passport.authenticate('jwt', { session: false }),
     }
   })
 
+  app.put('/upload-profilepic', passport.authenticate('jwt',
+    { session: false }),
+    async (req, res) => {
+
+      if(!req.files){
+        res.send({
+          status: false,
+          message: 'No file uploaded'
+        })
+      }else{
+    let targetUser = await db.user.findOne({ where: { id: req.user.id } })
+        const picture = req.files.photoPost
+        const picturename = `${req.user.id}${(new Date()).getTime()}.jpeg`
+        picture.mv('./upload/'+picturename)
+        // res.send({
+        //   status:true,
+        //   message:'file is upload',
+        //   data:{
+        //     name:picturename,
+        //     size:picture.size
+        //   }
+        // })
+        targetUser.update({
+          profile_img_url: `http://localhost:8080/${picturename}`
+        }).then(result => {
+          res.status(201).send(result)
+        }).catch((err) => {
+          console.log(err)
+          res.status(400).send({ message: err.message })
+        })
+      }
+    })
 
 
 

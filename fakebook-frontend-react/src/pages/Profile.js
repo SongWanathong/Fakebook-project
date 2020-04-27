@@ -5,6 +5,7 @@ import PostList from '../component/PostList'
 import { connect } from 'react-redux';
 import Axios from '../config/axios.setup';
 
+
  class Profile extends React.Component {
   constructor(props) {
     super(props)
@@ -33,6 +34,11 @@ import Axios from '../config/axios.setup';
             name={this.props.user.name}
           />
         </Row>
+
+    
+      
+
+        
         <Row type="flex" justify="center">
           <Col md={18} sm={20} xs={22}>
             <Divider />
@@ -40,7 +46,7 @@ import Axios from '../config/axios.setup';
         </Row>
         <Row type="flex" justify="center">
           <Col md={12} sm={16} xs={24}>
-            <PostList postList={this.state.postList} />
+            <PostList render={this.componentDidMount} postList={this.state.postList} />
           </Col>
         </Row>
       </Col>

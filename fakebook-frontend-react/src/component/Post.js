@@ -12,14 +12,33 @@ let { Meta } = Card
 
 
 class Post extends Component {
+    state = {
+        inputCommentValue: ''
+    }
 
     handleClickdeletePost = (id) => () => {
-        console.log(id)
+        // console.log(id)
         Axios.delete(`/delete-post/${id}`).then(result => {
             this.props.render()
         }).catch(err => {
             console.log(err.respone)
         })
+    }
+
+    handleClickAddComment = (id) => () => {
+        // console.log(id)
+        Axios.post(`/create-comment/${id}`, {
+            message: this.state.inputCommentValue
+        }).then(result => {
+            this.setState(state => ({
+                inputCommentValue: ''
+
+            }), () => {
+                this.props.render()
+            })
+
+        })
+
     }
     render() {
         let { author, image_url, message, commentList, updatedAt, id } = this.props.post
@@ -52,9 +71,9 @@ class Post extends Component {
                 <Row style={{ margin: '15px' }} type='flex' justify='center'><img width='450px' src={image_url}></img></Row>
                 <Col>
 
-                    <TextArea rows={3} />
+                    <TextArea rows={3} value={this.state.inputCommentValue} onChange={(e) => { this.setState({ inputCommentValue: e.target.value }) }} />
                     <Button htmlType="submit"
-                        //  loading={} onClick={} 
+                        onClick={this.handleClickAddComment(id)}
                         type="primary">
                         Add Comment
                             </Button>

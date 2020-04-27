@@ -1,4 +1,4 @@
-import { LOGIN_USER, LOGOUT_USER } from '../actions/actions'
+import { LOGIN_USER, LOGOUT_USER, PROFILEPIC } from '../actions/actions'
 import jwtDecode from 'jwt-decode'
 
 const initialState = () => {
@@ -24,6 +24,11 @@ function userReducer(currentUser = initialState(), action) {
     case LOGOUT_USER:
       return {
         role: "guest"
+      }
+    case PROFILEPIC:
+      return {
+        ...currentUser,
+        profilePic: action.profile_img_url
       }
     default:
       return currentUser

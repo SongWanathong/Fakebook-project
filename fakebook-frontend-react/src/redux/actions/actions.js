@@ -2,6 +2,7 @@
 
 export const LOGIN_USER = 'LOGIN_USER'
 export const LOGOUT_USER = 'LOGOUT_USER'
+export const PROFILEPIC = 'PROFILEPIC'
 
 export function logoutUser() {
   localStorage.removeItem("ACCESS_TOKEN")
@@ -19,6 +20,12 @@ export function login(user, token) {
   return {
     type: LOGIN_USER,
     ...user
+  }
+}
+
+export function profilepic(profile_img_url){
+  return{ type :PROFILEPIC  ,
+    profile_img_url:profile_img_url
   }
 }
 

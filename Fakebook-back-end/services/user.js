@@ -143,6 +143,15 @@ app.put('/change-password', passport.authenticate('jwt', { session: false }),
     }
   })
 
+  app.get('/myid', passport.authenticate('jwt',
+  { session: false }),
+  async (req, res) => {
+    let targetUser = await db.user.findOne({ where: { id: req.user.id } })
+    res.send(targetUser)
+
+
+  })
+
   app.put('/upload-profilepic', passport.authenticate('jwt',
     { session: false }),
     async (req, res) => {

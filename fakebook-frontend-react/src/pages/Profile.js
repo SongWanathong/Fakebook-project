@@ -4,6 +4,7 @@ import { Row, Col, Divider } from 'antd'
 import PostList from '../component/PostList'
 import { connect } from 'react-redux';
 import Axios from '../config/axios.setup';
+import { profilepic } from '../redux/actions/actions';
 
 
  class Profile extends React.Component {
@@ -22,6 +23,13 @@ import Axios from '../config/axios.setup';
    this.setState({
     postList:result.data
    })
+     Axios.get('/myid').then(result=>{
+console.log(result.data)
+   this.props.profilepic(result.data.profile_img_url)
+
+     })
+
+
 
   }
 
@@ -59,4 +67,9 @@ const mapStateToProps = (state)=>{
   }
 }
 
-export default connect( mapStateToProps,null)(Profile)
+const mapDisPacthtoProps={
+  profilepic :profilepic
+}
+
+
+export default connect( mapStateToProps,mapDisPacthtoProps)(Profile)

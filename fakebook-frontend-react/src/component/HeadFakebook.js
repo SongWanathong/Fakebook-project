@@ -15,22 +15,23 @@ class HeadFakebook extends React.Component {
   componentDidUpdate = () => {
     this.handleuploadprofile()
   }
-  handleuploadprofile = () => {
+  handleuploadprofile =  () => {
 
     let payload = new FormData()
         payload.append('photoPost', this.state.fileList[0])
-        Axios.put('/upload-profilepic', payload)
+           Axios.put('/upload-profilepic', payload)
             .then(result => {
-              
-                this.props.profilepic(result.data.profile_img_url)
                 window.location.reload();
-  
             })
   }
 
   render() {
     const { fileList } = this.state;
     const props = {
+      onChange(info) {
+       
+
+      },
       onRemove: file => {
         this.setState(state => {
           const index = state.fileList.indexOf(file);

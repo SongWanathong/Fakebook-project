@@ -3,6 +3,9 @@ import { Row, Col, Input, Button,Form } from 'antd';
 import Axios from '../../config/axios.setup';
 import { failLoginNotification,successLoginNotification } from '../../component/notification';
 import jwtDecode from 'jwt-decode';
+import { connect } from 'react-redux'
+import { login } from '../../redux/actions/actions'
+
 class Login extends Component {
 
     state = {
@@ -11,9 +14,6 @@ class Login extends Component {
     }
 
     handleSubmit = () => {
-
-    
-
         const username = this.state.username
         const password = this.state.password
         Axios.post('/loginUser', {
@@ -21,16 +21,16 @@ class Login extends Component {
         }).then((result) => {
             
             successLoginNotification()
-           const token = localStorage.setItem("ACCESS_TOKEN", result.data.token)
+           const token = result.data.token
             const user =jwtDecode(token)
+            this.props.login(user, result.data.token)
             // localStorage.setItem('User',user)
+            this.props.history.push('/')
+            window.location.reload(true);
 
-           
-            
-            this.props.history.push('/home')
         }).catch((err) => {
             console.log(err);
-            failLoginNotification(err.response.data.message)
+            // failLoginNotification(err.response)
         })
 
 
@@ -76,4 +76,8 @@ class Login extends Component {
     }
 }
 
-export default Login;
+const mapDispatchToProps = {
+    login: login
+  }
+export default connect(null,mapDispatchToProps)(Login);
+

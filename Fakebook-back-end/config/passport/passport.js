@@ -1,8 +1,9 @@
+
 const env = process.env.NODE_ENV || 'development'
 const config = require('../config.json')[env]
 const bcrypt = require('bcryptjs')
 
-const BCRYPT_SALT_ROUNDS = config.salt_length
+const BCRYPT_SALT_ROUNDS = 12
 const passport = require('passport')
 const localStrategy = require('passport-local').Strategy
 const JWTStrategy = require('passport-jwt').Strategy
@@ -61,7 +62,7 @@ passport.use('login', new localStrategy({
      if(!res){
          return done(null,false,{message:'username or password incorrect'})
      }
-     console.log(`user ${user.id} is found & autehnticate`)
+     console.log(`user ${user.id} is found & authenticated`)
      return done(null,user)
  })
 }

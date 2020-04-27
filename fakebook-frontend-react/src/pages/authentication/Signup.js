@@ -29,18 +29,15 @@ class Signup extends Component {
       successSingupNotification()
       console.log(result)
       this.props.history.push('/login')
-      
+
 
     }).catch((err) => {
       failSingupNotification(err.response.data)
       console.log(err.response.data)
-      this.props.history.push('/login')
-      
-     
-     
-  
+
     })
-    value.resetFields()
+
+
 
   }
 
@@ -69,11 +66,11 @@ class Signup extends Component {
                       required: true,
                       message: 'Please input your E-mail!',
                     },
-                
+
                   ]}
-                  
+
                 >
-                  <Input  placeholder="Username" type='Username' 
+                  <Input placeholder="Username" type='Username'
                   />
                 </Form.Item>
 
@@ -84,13 +81,17 @@ class Signup extends Component {
                     {
                       required: true,
                       message: 'please input your password'
+                    },
+                    {
+                      min:5,
+                      message: 'Password cannot be less than 5 characters',
                     }
 
                   ]}
                   hasFeedback
 
                 >
-                  <Input.Password type='password' placeholder="password" 
+                  <Input.Password type='password' placeholder="password"
                   />
                 </Form.Item>
 
@@ -115,8 +116,8 @@ class Signup extends Component {
                   ]}
                   hasFeedback
                 >
-                  <Input.Password type='password' placeholder="Confirm password" 
-                  
+                  <Input.Password type='password' placeholder="Confirm password"
+
                   />
                 </Form.Item>
 
@@ -131,10 +132,10 @@ class Signup extends Component {
                   ]}
                 >
                   <Input placeholder="Name"
-                  
+
                   />
                 </Form.Item>
-                
+
               </Col>
 
             </Row>
@@ -143,8 +144,15 @@ class Signup extends Component {
               <Form.Item>
                 <Button htmlType="submit" type="primary">Signup</Button>
               </Form.Item>
+              
             </Row>
           </Form>
+          <Row type='flex' justify='center'>
+                  <Col>
+          <Button   type="link"><a href='/login'>Login</a></Button>
+                  </Col>
+          </Row>
+
         </Col>
       </Row>
     );

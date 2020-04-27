@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 
 class Changepassword extends Component {
     render() {
+        console.log('asdasd')
         return (
             <div>
-                c
+                asdasd
             </div>
         );
     }

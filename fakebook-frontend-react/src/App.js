@@ -8,32 +8,38 @@ import Navbar from './component/navbar';
 import { Redirect,Switch } from 'react-router';
 import Home from './pages/Home';
 import Login from './pages/authentication/Login';
+import PrivateRoute from './component/privte-route/PrivateRoute';
+import { connect } from 'react-redux';
 
 
 
 const { Header, Footer, Sider, Content } = Layout;
-function App() {
+class App extends React.Component{
+render() {
+  const role = this.props.user.role
+    console.log(role)
   return (
     <Layout>
-      <Header style={{height:'100%'}} ><Navbar/></Header>
+      <Header style={{height:'100%'}} >
+        {role == 'guest' ? null:<Navbar/>}
+        
+        
+        </Header>
       <Content style={{height:'100%'}}>
         <Switch>
           
-      
-      <Route exact path='/changepassword' component={Changepassword} />
-      <Route exact path='/signup' component={Signup} />
-      <Route exact path='/profile' component={Profile} />
-     {localStorage.getItem('ACCESS_TOKEN')? 
-     <Route exact path='/home' component={Home} />
-     :null}
-     {!localStorage.getItem('ACCESS_TOKEN')? 
-     <Route exact path='/' component={Login} />
-          :null}
-      <Redirect to='/'/>
+          <PrivateRoute role={role} />
+     
       </Switch>
       </Content>
     </Layout>
   );
 }
+}
 
-export default App;
+const mapStateToProps =(state)=>{
+  return{
+    user:state.user
+  }
+}
+export default connect(mapStateToProps,null)(App);

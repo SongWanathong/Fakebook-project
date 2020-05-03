@@ -16,6 +16,14 @@ const components = {
       component: 'Friend',
       url: '/friends',
     },
+    feed: {
+      component: 'Feed',
+      url: '/feed',
+    },
+    friendProfile: {
+      component: 'Friendprofile',
+      url: '/profile',
+    },
     home: {
       component: 'Home',
       url: '/',
@@ -30,14 +38,19 @@ const components = {
     //role name as a key.
     admin: {
       routes: [...Object.values(components)],
-      redirect:'/admin'
+      redirect:'/admin',
+      
     },
     user: {
       routes: [
         components.changepassword,
         components.friend,
         components.home,
-        components.profile
+        components.profile,
+        components.friendProfile,
+        components.feed
+
+
       ],
       redirect:'/admin'
 

@@ -61,6 +61,7 @@ class HeadFakebook extends React.Component {
               size={128}
               src={this.props.imageSrc}
             /> */}
+            
             <Upload {...props} >
               <div className="container">
                 <Avatar className="image"
@@ -89,5 +90,6 @@ class HeadFakebook extends React.Component {
 const mapDisPacthtoProps={
   profilepic :profilepic
 }
+
 
 export default connect(null,mapDisPacthtoProps)(HeadFakebook)

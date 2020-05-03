@@ -63,7 +63,7 @@ class CreatePost extends Component {
         return (
 
 
-            <Card style={{ marginTop: '15px' }} title="Create"  >
+            <Card style={{ marginTop: '15px',width:'540px' }} title="Create"  >
                 <Row  >
                     <Col   >
                         <Avatar icon="user" src={avatarsrc} size='large' />

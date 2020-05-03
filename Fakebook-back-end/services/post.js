@@ -62,7 +62,7 @@ module.exports = (app, db) => {
 
           { model: db.user, as: 'author', attributes: ['id', 'name', 'profile_img_url'] },
           { model: db.comment, as: 'commentList', include: [{ model: db.user, attributes: ['id', 'name', 'profile_img_url'] }] }
-        ]
+        ],order: [['id', 'DESC']]
       })
         .then(result => {
           res.status(200).send(result)
@@ -112,7 +112,28 @@ module.exports = (app, db) => {
 
           { model: db.user, as: 'author', attributes: ['id', 'name', 'profile_img_url'] },
           { model: db.comment, as: 'commentList', include: [{ model: db.user, attributes: ['id', 'name', 'profile_img_url'] }] }
-        ]
+        ],
+        order: [['id', 'DESC']]
+      }).then(result => {
+        res.status(200).send(result)
+      })
+        .catch(err => {
+          res.status(400).send({ message: err.message })
+        })
+    })
+
+    app.get('/frind-posts/:fid', passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+
+      db.post.findAll({
+        where: { user_id: req.params.fid },
+        include: [
+
+          { model: db.user, as: 'author', attributes: ['id', 'name', 'profile_img_url'] },
+          { model: db.comment, as: 'commentList', include: [{ model: db.user, attributes: ['id', 'name', 'profile_img_url'] }] }
+        ],
+        order: [['id', 'DESC']]
+
       }).then(result => {
         res.status(200).send(result)
       })

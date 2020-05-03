@@ -17,7 +17,7 @@ class Home extends Component {
 
     componentDidMount = async () => {
 
-        let result = Axios.get('/post-list').then((response) => {
+        let result = Axios.get('/feed').then((response) => {
           
             this.setState({ postList: response.data })
         })

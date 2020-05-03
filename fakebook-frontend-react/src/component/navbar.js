@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Menu, Dropdown, Col, Button, Avatar } from 'antd';
 import { connect } from 'react-redux'
-import { logout } from '../redux/actions/actions';
+import { logout, fetchFriendProfile } from '../redux/actions/actions';
 import { Link, withRouter } from 'react-router-dom';
 
 
@@ -13,6 +13,11 @@ class Navbar extends Component {
         this.props.history.push('/login')
         window.location.reload(true);
     }
+
+    handleClickfetchFriendProfile = (fid)=>()=>{
+      console.log(fid)
+      this.props.fetchFriendProfile(fid)
+  }
     render() {
 
         const menu = (
@@ -44,7 +49,7 @@ class Navbar extends Component {
                     mode='horizontal'
                 >
                 <Menu.Item><a href='/'>All Post</a> </Menu.Item>
-                <Menu.Item> <a href='/'>My Post & friends</a></Menu.Item>
+                <Menu.Item> <a href='/feed'>My Post & friends</a></Menu.Item>
                     
                     {/* <Menu.Item style={{ position: 'absolute', right: '20px' }} >
                         <a onClick={() => this.handlelogout()}> ออกจากระบบ</a>
@@ -55,9 +60,10 @@ class Navbar extends Component {
                         <Avatar icon="user" src={this.props.user.profilePic} size='large' />
 
                                 <Link to="/my-profile">
-                                    <Button  selectedKeys=''  type="link">{
+                                    <Button  selectedKeys='' onClick ={this.handleClickfetchFriendProfile(this.props.user)}  
+                                    type="link">{
                                     this.props.user.name
-                                    
+                        
                                     }</Button>
                                 </Link>
                             </Col>
@@ -79,7 +85,9 @@ const mapStateToProps = (state) => {
   }
 
 const mapDispatchToProps = {
-    logout: logout
+    logout: logout,
+    fetchFriendProfile :fetchFriendProfile
 }
+
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));

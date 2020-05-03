@@ -80,7 +80,15 @@ module.exports = (app,db)=>{
     })
 
     
-    
+    async function getUserInfo(user_id) {
+      const user = await db.user.findOne({
+        attributes: ['id', 'name'],
+        where: { id: user_id },
+        raw: true
+      })
+      return user
+    }
+  
   app.get('/user/:id', passport.authenticate('jwt', { session: false }),
   async function (req, res) {
     const userId = req.user.id

@@ -6,6 +6,7 @@ import TextArea from 'antd/lib/input/TextArea';
 import { IconMap, Icon } from 'antd/lib/result';
 import Axios from '../config/axios.setup';
 import { connect } from 'react-redux';
+import { fetchFriendProfile } from '../redux/actions/actions';
 
 
 let { Meta } = Card
@@ -40,20 +41,31 @@ class Post extends Component {
         })
 
     }
+
+    handleClickfetchFriendProfile = (fid)=>()=>{
+        console.log(fid)
+        this.props.fetchFriendProfile(fid)
+    }
     render() {
         let { author, image_url, message, commentList, updatedAt, id } = this.props.post
 
 
         return (
-            <Card style={{ marginTop: '10px' }} >
-                <Row type='flex' style={{ margin: '15px' }}>
+            <Card style={{ marginTop: '10px',width:'550px' }} >
+                <Row type='flex' >
 
                     <Col style={{ height: '100%', width: 'max-content' }}>
                         <Avatar size='large' icon="user" src={author.profile_img_url} />
                     </Col>
                     <Col style={{ width: 'min-content' }}>
                         <Row>
-                            <Button type="link"><strong> {author.name}</strong></Button>
+                            <Button type="link" onClick ={this.handleClickfetchFriendProfile(author)}>
+                                <a href='/profile'>
+
+                                <strong> {author.name}</strong>
+                                </a>
+                                
+                                </Button>
                         </Row>
                         <Row style={{ paddingLeft: '15px' }}>
                             <Text>{updatedAt.slice(0, 10)}</Text>
@@ -93,5 +105,7 @@ const mapStatetoProps = (state) => {
     }
 
 }
-
-export default connect(mapStatetoProps, null)(Post);
+const mapDisPacthtoProps={
+    fetchFriendProfile :fetchFriendProfile
+  }
+export default connect(mapStatetoProps, mapDisPacthtoProps)(Post);
